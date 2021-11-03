@@ -1,0 +1,30 @@
+{
+  "name": "sequelize-bcrypt",
+  "version": "1.0.0",
+  "description": "Sequelize helper plugin to hash/compare fields",
+  "license": "MIT",
+  "keywords": [
+    "sequelize",
+    "sequelize-plugin",
+    "bcrypt"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mattiamalonni/sequelize-bcrypt.git"
+  },
+  "author": {
+    "name": "Mattia Malonni",
+    "email": "mattia.malonni@gmail.com"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "sequelize": "^6.9.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.4.1"
+  }
+}
