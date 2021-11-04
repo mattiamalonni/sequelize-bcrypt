@@ -1,11 +1,12 @@
 {
   "name": "sequelize-bcrypt",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Sequelize helper plugin to hash/compare fields",
   "license": "MIT",
   "keywords": [
     "sequelize",
     "sequelize-plugin",
+    "sequelize-extension",
     "bcrypt"
   ],
   "repository": {
@@ -18,8 +19,8 @@
   },
   "main": "index.js",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "sequelize": "^6.9.0"
+    "bcryptjs": "^2.0.0",
+    "sequelize": "^6.0.0"
   },
   "devDependencies": {
     "eslint": "^8.1.0",

@@ -10,7 +10,7 @@ npm i sequelize-bcrypt
 
 ```javascript
 const { Sequelize, DataTypes } = require('sequelize');
-const SequelizeBcrypt = require('sequelize-bcrypt');
+const useBcrypt = require('sequelize-bcrypt');
 
 const database = new Sequelize({
   ...sequelizeConnectionOptions,
@@ -21,7 +21,7 @@ const User = database.define('User', {
   password: { type: DataTypes.STRING },
 });
 
-SequelizeBcrypt.useBcrypt(User, options);
+useBcrypt(User, options);
 ```
 
 ## Options
