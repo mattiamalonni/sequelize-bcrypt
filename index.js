@@ -33,9 +33,9 @@ const useBcrypt = (Model, options = DEFAULT_OPTIONS) => {
     return bcrypt.compareSync(plainValue, this._previousDataValues[opts.field]);
   };
 
-  Model.addHook('beforeCreate', hashField);
-  Model.addHook('beforeUpdate', hashField);
+  Model.addHook('beforeSave', hashField);
 };
 
+exports.bcrypt = bcrypt;
 exports.useBcrypt = useBcrypt;
 module.exports = useBcrypt;

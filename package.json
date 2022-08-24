@@ -1,6 +1,6 @@
 {
   "name": "sequelize-bcrypt",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Sequelize helper plugin to hash/compare fields",
   "license": "MIT",
   "keywords": [
