@@ -1,31 +1,69 @@
 {
   "name": "sequelize-bcrypt",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "Sequelize helper plugin to hash/compare fields",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "license": "MIT",
   "keywords": [
     "sequelize",
     "sequelize-plugin",
     "sequelize-extension",
-    "bcrypt"
+    "bcrypt",
+    "typescript"
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/mattiamalonni/sequelize-bcrypt.git"
   },
-  "author": {
-    "name": "Mattia Malonni",
-    "email": "mattia.malonni@gmail.com"
+  "author": "Mattia Malonni",
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --out-dir dist --clean --sourcemap && tsc -p tsconfig.build.json",
+    "check": "tsc --noEmit && npm run lint && npm run format:check",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest",
+    "prepublishOnly": "npm run check && npm run test:coverage && npm run build"
   },
-  "main": "index.js",
   "dependencies": {
-    "bcryptjs": "^2.0.0",
-    "sequelize": "^6.0.0"
+    "bcryptjs": "^3.0.3"
+  },
+  "peerDependencies": {
+    "sequelize": "^6"
   },
   "devDependencies": {
-    "eslint": "^8.1.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "prettier": "^2.4.1"
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.4",
+    "@vitest/coverage-v8": "^5.0.3",
+    "eslint": "^10.12.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.13.0",
+    "prettier": "^3.9.9",
+    "sequelize": "^6.37.8",
+    "sqlite3": "^6.0.1",
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.71.1",
+    "vitest": "^5.0.3"
   }
 }

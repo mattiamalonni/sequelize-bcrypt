@@ -1,0 +1,51 @@
+name: Publish to npm
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.release.tag_name }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+      - name: Install dependencies
+        run: npm ci
+      - name: Verify release version
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          expected_tag="$(node -p "require('./package.json').version")"
+          if [[ "$RELEASE_TAG" != "$expected_tag" ]]; then
+            echo "Release tag $RELEASE_TAG does not match package version $expected_tag"
+            exit 1
+          fi
+      - name: Run checks
+        run: npm run check
+      - name: Run tests and coverage
+        run: npm run test:coverage
+      - name: Build
+        run: npm run build
+      - name: Check npm version
+        id: npm_version
+        run: |
+          package_name=$(node -p "require('./package.json').name")
+          package_version=$(node -p "require('./package.json').version")
+          if npm view "${package_name}@${package_version}" version >/dev/null 2>&1; then
+            echo "Version ${package_name}@${package_version} is already published."
+            echo "already_published=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "already_published=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Publish to npm
+        if: steps.npm_version.outputs.already_published != 'true'
+        run: npm publish --provenance --access public
